@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# La Cartelera de Hype Tecnológico :D
 
-## Getting Started
+Hola de antemano muchas gracias por tenerme en cuenta y espero que el proyecto sea de su agrado. Esta Aplicación fullstack consume datos simulados de la API de YouTube, procesa los datos y los presenta en una cartelera visual rankeada por "Nivel de Hype".
 
-First, run the development server:
+## Requisitos
+
+Antes de comenzar asegúrate de tener esto instalado en tu máquina, de lo contrario no va a funcionar:
+
+- [Node.js](https://nodejs.org/) v18 o superior
+- npm v9 o superior
+
+## Instalación
+
+```bash
+npm install
+```
+
+## Levantar el proyecto localmente
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+> El backend y el frontend corren en el mismo proceso. No hay que levantar dos servidores separados.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Correr los tests
 
-## Learn More
+Se incluyen 18 tests unitarios usando el runner nativo de Node.js — sin dependencias adicionales:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm test
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Cubre todos los casos de `hypeLevel` (fórmula base, modificador tutorial, comentarios desactivados, división por cero) y `relativeTime` (hoy, ayer, días, semanas, meses, años).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Endpoints disponibles
 
-## Deploy on Vercel
+| Método | Ruta | Descripción |
+|--------|------|-------------|
+| `GET` | `/api/videos` | Devuelve los videos procesados, ordenados por Nivel de Hype descendente |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Ejemplo de respuesta de `/api/videos`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```json
+[
+  {
+    "id": "vid_003",
+    "thumbnail": "https://placehold.co/300x200/282c34/61dafb?text=TailwindCSS",
+    "title": "TailwindCSS errores comunes - Tutorial",
+    "author": "JuniorDev99",
+    "publishedAt": "Hace 2 años",
+    "hype": 0.308
+  }
+]
+```
+
+## Estructura del proyecto
+
+```
+├── app/
+│   ├── api/
+│   │   └── videos/
+│   │       └── route.ts       # Endpoint GET /api/videos (lógica de backend)
+│   ├── components/
+│   │   └── VideoBoard.tsx     # Grilla de videos con buscador, estados loading/error
+│   ├── lib/
+│   │   └── videos.ts          # Funciones puras hypeLevel y relativeTime
+│   ├── globals.css            # Estilos globales + animación shimmer dorada
+│   ├── layout.tsx
+│   └── page.tsx               # Página principal
+├── data/
+│   └── mock-youtube-api.json  # Datos simulados de YouTube API (fuente de datos)
+└── tests/
+    └── videos.test.mts        # Tests unitarios (Node.js test runner nativo)
+```
+
+> Muchas gracias por probar mi proyecto y espero sea de su agrado :D
