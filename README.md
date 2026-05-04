@@ -32,8 +32,8 @@ Instala las dependencias del **backend**:
 
 ```bash
 cd backend
+
 npm install
-cd ..
 ```
 
 ## Levantar el proyecto localmente
