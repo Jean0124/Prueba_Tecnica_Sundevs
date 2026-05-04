@@ -18,6 +18,7 @@ Clona el repositorio:
 
 ```bash
 git clone https://github.com/Jean0124/pruebaTecnica.git
+
 cd la_cartelera_de_hype_tecnologico
 ```
 
