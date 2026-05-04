@@ -7,7 +7,7 @@ La prueba pedía un backend en **NestJS** y un frontend en **ReactJS**. La soluc
 - **Backend** → aplicación NestJS en `backend/`, con un controlador que expone `GET /api/videos` en el puerto 3001.
 - **Frontend** → React Client Component (`VideoBoard.tsx`) servido por Next.js en el puerto 3000, que consume el endpoint de NestJS.
 
-Esta separación respeta el stack pedido y mantiene una arquitectura clara: el backend transforma y filtra, el frontend solo renderiza lo que recibe.
+Esta separación mantiene una arquitectura clara: el backend transforma y filtra, el frontend solo renderiza lo que recibe.
 
 ## Decisiones técnicas principales
 
@@ -142,9 +142,5 @@ Ya teniendo el front se le preguntó por alguna mejora visual, con lo cual nos d
 
 Como buena práctica me gusta hacer tests unitarios para probar los procesos del backend que son los más importantes.
 
-**Prompt de migración a NestJS:**
-> "pregunta y si lo cambiamos por nestjs?"
-
-Se decidió migrar el backend de un Route Handler de Next.js a NestJS para cumplir exactamente con el stack pedido en la prueba. Claude generó la estructura de módulos, controlador y servicio, y se validó que la lógica de negocio era idéntica a la versión anterior.
 
 Al final se implementaron dos mejoras adicionales: un buscador en vivo que filtra por título en memoria y el skeleton de carga para mejorar la accesibilidad con lectores de pantalla.
