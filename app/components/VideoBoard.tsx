@@ -200,8 +200,9 @@ export default function VideoBoard() {
   // Texto del buscador — filtra sobre el array ya cargado sin llamadas extra al API
   const [busqueda, setBusqueda] = useState('')
 
-  // Se ejecuta una sola vez al montar el componente (array vacío [] como dependencia)
-  useEffect(() => {
+  function cargarVideos() {
+    setCargando(true)
+    setError(null)
     fetch('http://localhost:3001/api/videos')
       .then((respuesta) => {
         // fetch no lanza error en respuestas 4xx/5xx — hay que verificarlo manualmente
@@ -211,8 +212,11 @@ export default function VideoBoard() {
       })
       .then(setVideos)
       .catch((error: Error) => setError(error.message))
-      .finally(() => setCargando(false)) // se ejecuta siempre, haya error o no
-  }, [])
+      .finally(() => setCargando(false))
+  }
+
+  // Se ejecuta una sola vez al montar el componente (array vacío [] como dependencia)
+  useEffect(() => { cargarVideos() }, [])
 
   if (cargando) return <LoadingSkeleton />
 
@@ -222,7 +226,7 @@ export default function VideoBoard() {
         <span className="text-5xl" aria-hidden>⚠️</span>
         <p className="text-red-400 font-medium text-sm max-w-sm">{error}</p>
         <button
-          onClick={() => window.location.reload()}
+          onClick={cargarVideos}
           className="px-5 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 rounded-lg text-sm font-medium transition-colors cursor-pointer"
         >
           Reintentar
