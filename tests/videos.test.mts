@@ -1,7 +1,7 @@
 // Test runner y assertions integrados en Node.js — sin instalar nada
 import { describe, it } from 'node:test'
 import assert from 'node:assert/strict'
-import { hypeLevel, relativeTime } from '../app/lib/videos.ts'
+import { hypeLevel, relativeTime } from '../backend/src/videos/videos.utils.ts'
 
 // ─── hypeLevel ────────────────────────────────────────────────────────────────
 

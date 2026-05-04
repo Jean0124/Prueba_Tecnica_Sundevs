@@ -202,7 +202,7 @@ export default function VideoBoard() {
 
   // Se ejecuta una sola vez al montar el componente (array vacío [] como dependencia)
   useEffect(() => {
-    fetch('/api/videos')
+    fetch('http://localhost:3001/api/videos')
       .then((respuesta) => {
         // fetch no lanza error en respuestas 4xx/5xx — hay que verificarlo manualmente
         if (!respuesta.ok)
